@@ -1,6 +1,6 @@
 <?php
 $pageTitle = 'Our Products – SD Colours Photobook Lab';
-$pageDesc = 'Explore wedding albums, combo photo pads, LED frames, acrylic prints and wall canvas.';
+$pageDesc = 'Explore wedding albums, combo photo pads, LED frames, and wall acrylic prints.';
 require_once 'includes/header.php';
 require_once 'includes/db.php';
 
@@ -13,7 +13,7 @@ $acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND 
 
 <div class="page-hero">
   <h1 class="font-serif text-gradient">Our Products</h1>
-  <p>Explore our curated selection of premium wedding albums, combo photo pads, LED frames, and wall canvases.</p>
+  <p>Explore our curated selection of premium wedding albums, combo photo pads, LED frames, and wall acrylic prints.</p>
 </div>
 
 <div class="section bg-accent-light">
@@ -21,18 +21,22 @@ $acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND 
 
     <section id="albums" style="margin-bottom:5rem;">
       <div class="section-sep"></div>
-      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:2rem;">Photo Album Printing</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.5rem;">
+      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">Photo Album Printing</h2>
+      <p style="color:#6b7280;font-size:.9rem;margin-bottom:2rem;">All prices are per page. Select your album type, size, and preferred paper finish.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;">
         <?php foreach ($albums as $p):
           $sizes = json_decode($p['sizes'], true);
           $features = json_decode($p['features'], true);
+          $isPremium = $p['tag'] === 'Premium';
         ?>
-        <div class="album-card">
+        <div class="album-card" style="<?= $isPremium ? 'border-top:3px solid #7c3aed;' : '' ?>">
+          <?php if ($isPremium): ?><span style="background:#7c3aed;color:#fff;font-size:.65rem;padding:2px 8px;border-radius:10px;font-weight:700;display:inline-block;margin-bottom:.5rem;">Premium</span><?php endif; ?>
           <h3><?= htmlspecialchars($p['name']) ?></h3>
-          <div class="label-sm">Sizes</div>
-          <p><?= implode(', ', $sizes) ?></p>
-          <div class="label-sm mt-4">Paper Types</div>
-          <ul><?php foreach ($features as $f): ?><li><?= htmlspecialchars($f) ?></li><?php endforeach; ?></ul>
+          <?php if ($p['description']): ?><p style="color:#6b7280;font-size:.78rem;margin-bottom:.75rem;"><?= htmlspecialchars($p['description']) ?></p><?php endif; ?>
+          <div class="label-sm">Available Sizes</div>
+          <p style="font-size:.85rem;margin-bottom:.75rem;"><?= implode(', ', array_map('htmlspecialchars', $sizes)) ?></p>
+          <div class="label-sm mt-4" style="margin-top:.75rem;">Paper Types &amp; Per-Page Pricing</div>
+          <ul style="font-size:.8rem;margin-top:.4rem;"><?php foreach ($features as $f): ?><li><?= htmlspecialchars($f) ?></li><?php endforeach; ?></ul>
           <?php if (isPhotographer()): ?>
             <a href="/photographer/shop.php?cat=album" class="btn-wa" style="margin-top:1rem;display:block;text-align:center;">Order Now</a>
           <?php endif; ?>
@@ -111,19 +115,21 @@ $acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND 
       <?php endif; ?>
     </section>
 
-    <section id="wall-decor">
+    <section id="wall-acrylic">
       <div class="section-sep"></div>
-      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:2rem;">Wall Acrylic &amp; Canvas</h2>
+      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">Wall Acrylic Photo</h2>
+      <p style="color:#6b7280;font-size:.9rem;margin-bottom:2rem;">Premium 5mm thick crystal clear acrylic wall prints for home and studio display.</p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Size (Inches)</th><th>Price (₹)</th><?php if (isPhotographer()): ?><th>Action</th><?php endif; ?></tr></thead>
+          <thead><tr><th>Product</th><th>Thickness</th><th>Price (₹)</th><?php if (isPhotographer()): ?><th>Action</th><?php endif; ?></tr></thead>
           <tbody>
             <?php foreach ($acrylic as $p):
               $sizes = json_decode($p['sizes'], true);
             ?>
             <tr>
-              <td><?= htmlspecialchars($sizes[0] ?? '') ?></td>
-              <td>₹<?= number_format($p['price']) ?></td>
+              <td style="font-weight:600;"><?= htmlspecialchars($p['name']) ?></td>
+              <td><span style="background:#f3f4f6;padding:2px 8px;border-radius:4px;font-size:.78rem;font-weight:700;">5mm</span></td>
+              <td style="font-weight:700;color:var(--primary);">₹<?= number_format($p['price']) ?></td>
               <?php if (isPhotographer()): ?>
               <td><a href="/photographer/shop.php?cat=wall_acrylic" style="color:var(--primary);font-weight:600;font-size:.85rem;">Order</a></td>
               <?php endif; ?>
@@ -132,6 +138,9 @@ $acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND 
           </tbody>
         </table>
       </div>
+      <?php if (isPhotographer()): ?>
+        <a href="/photographer/shop.php?cat=wall_acrylic" class="btn-primary" style="margin-top:1.5rem;display:inline-block;">Order Wall Acrylic</a>
+      <?php endif; ?>
     </section>
 
   </div>

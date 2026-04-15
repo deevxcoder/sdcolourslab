@@ -57,15 +57,18 @@ $acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND 
 
     <section>
       <div class="section-sep"></div>
-      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:2rem;">Wall Acrylic &amp; Canvas</h2>
+      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">Wall Acrylic Photo</h2>
+      <p style="color:#6b7280;font-size:.9rem;margin-bottom:1.5rem;">Premium 5mm crystal clear acrylic wall prints.</p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Size (Inches)</th><th>Price (₹)</th></tr></thead>
+          <thead><tr><th>Product</th><th>Thickness</th><th>Price (₹)</th></tr></thead>
           <tbody>
-            <?php foreach ($acrylic as $p):
-              $sizes = json_decode($p['sizes'], true);
-            ?>
-            <tr><td><?= htmlspecialchars($sizes[0] ?? '') ?></td><td>₹<?= number_format($p['price']) ?></td></tr>
+            <?php foreach ($acrylic as $p): ?>
+            <tr>
+              <td style="font-weight:600;"><?= htmlspecialchars($p['name']) ?></td>
+              <td><span style="background:#f3f4f6;padding:2px 8px;border-radius:4px;font-size:.78rem;font-weight:700;">5mm</span></td>
+              <td style="font-weight:700;color:var(--primary);">₹<?= number_format($p['price']) ?></td>
+            </tr>
             <?php endforeach; ?>
           </tbody>
         </table>
