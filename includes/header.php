@@ -22,6 +22,7 @@ $cartCount = $loggedIn && $role === 'photographer' ? getCartCount() : 0;
     .user-menu { display: flex; align-items: center; gap: 0.75rem; }
     .btn-dash { background: var(--primary); color: #fff; padding: .4rem 1rem; border-radius: 6px; font-size: .8rem; font-weight: 700; text-decoration: none; }
     .btn-logout { background: #f3f4f6; color: #374151; padding: .4rem 1rem; border-radius: 6px; font-size: .8rem; font-weight: 700; text-decoration: none; }
+    @media (max-width: 1023px) { .user-menu { display: none; } }
   </style>
 </head>
 <body>
