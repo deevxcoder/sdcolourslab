@@ -42,13 +42,34 @@ $acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND 
 
     <section style="margin-bottom:4rem;">
       <div class="section-sep"></div>
-      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:2rem;">LED Frames</h2>
+      <h2 class="font-serif" style="font-size:1.75rem;font-weight:800;margin-bottom:.5rem;">LED Frames</h2>
+      <p style="color:#6b7280;font-size:.9rem;margin-bottom:1.5rem;">Includes Panel + Guard + Adaptor. Bulk discounts from Qty 15 onward.</p>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>Product</th><th>Price (₹)</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th style="text-align:center;">Qty 1+</th>
+              <th style="text-align:center;">Qty 15+</th>
+              <th style="text-align:center;">Qty 25+</th>
+              <th style="text-align:center;">Qty 50+</th>
+            </tr>
+          </thead>
           <tbody>
-            <?php foreach ($led as $p): ?>
-            <tr><td><?= htmlspecialchars($p['name']) ?></td><td>₹<?= number_format($p['price']) ?></td></tr>
+            <?php foreach ($led as $p):
+              $tiers = json_decode($p['features'], true);
+              $prices = [];
+              foreach ($tiers as $t) {
+                preg_match('/₹([\d,]+)/', $t, $m);
+                $prices[] = $m[1] ?? '-';
+              }
+            ?>
+            <tr>
+              <td style="font-weight:700;"><?= htmlspecialchars($p['name']) ?></td>
+              <?php foreach ($prices as $pr): ?>
+              <td style="text-align:center;font-weight:600;color:var(--primary);">₹<?= $pr ?></td>
+              <?php endforeach; ?>
+            </tr>
             <?php endforeach; ?>
           </tbody>
         </table>
