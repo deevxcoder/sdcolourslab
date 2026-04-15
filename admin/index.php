@@ -11,7 +11,7 @@ $pendingOrders = $db->query("SELECT COUNT(*) FROM orders WHERE status='pending'"
 $totalPhotographers = $db->query("SELECT COUNT(*) FROM users WHERE role='photographer'")->fetchColumn();
 $pendingPhotographers = $db->query("SELECT COUNT(*) FROM users WHERE role='photographer' AND status='pending'")->fetchColumn();
 $totalRevenue = $db->query("SELECT COALESCE(SUM(total),0) FROM orders WHERE status != 'cancelled'")->fetchColumn();
-$totalProducts = $db->query("SELECT COUNT(*) FROM products WHERE active=true")->fetchColumn();
+$totalProducts = $db->query("SELECT COUNT(*) FROM products WHERE active=1")->fetchColumn();
 
 $recentOrders = $db->query("SELECT o.*, u.name as photographer_name FROM orders o JOIN users u ON o.photographer_id=u.id ORDER BY o.created_at DESC LIMIT 8")->fetchAll();
 

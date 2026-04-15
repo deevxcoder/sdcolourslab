@@ -5,10 +5,10 @@ require_once 'includes/header.php';
 require_once 'includes/db.php';
 
 $db = getDB();
-$combos = $db->query("SELECT * FROM products WHERE category='combo' AND active=true ORDER BY sort_order")->fetchAll();
-$albums = $db->query("SELECT * FROM products WHERE category='album' AND active=true ORDER BY sort_order")->fetchAll();
-$led = $db->query("SELECT * FROM products WHERE category='led_frame' AND active=true ORDER BY sort_order")->fetchAll();
-$acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND active=true ORDER BY sort_order")->fetchAll();
+$combos = $db->query("SELECT * FROM products WHERE category='combo' AND active=1 ORDER BY sort_order")->fetchAll();
+$albums = $db->query("SELECT * FROM products WHERE category='album' AND active=1 ORDER BY sort_order")->fetchAll();
+$led = $db->query("SELECT * FROM products WHERE category='led_frame' AND active=1 ORDER BY sort_order")->fetchAll();
+$acrylic = $db->query("SELECT * FROM products WHERE category='wall_acrylic' AND active=1 ORDER BY sort_order")->fetchAll();
 ?>
 
 <div class="page-hero">

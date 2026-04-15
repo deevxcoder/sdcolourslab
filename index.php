@@ -5,7 +5,7 @@ require_once 'includes/header.php';
 require_once 'includes/db.php';
 
 $db = getDB();
-$featured = $db->query("SELECT * FROM products WHERE active = true AND tag IS NOT NULL ORDER BY sort_order LIMIT 3")->fetchAll();
+$featured = $db->query("SELECT * FROM products WHERE active = 1 AND tag IS NOT NULL ORDER BY sort_order LIMIT 3")->fetchAll();
 ?>
 
   <section class="hero">

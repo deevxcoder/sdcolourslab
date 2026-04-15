@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $qty = max(1, (int)($_POST['quantity'] ?? 1));
     $notes = trim($_POST['notes'] ?? '');
 
-    $stmt = $db->prepare('SELECT * FROM products WHERE id=? AND active=true');
+    $stmt = $db->prepare('SELECT * FROM products WHERE id=? AND active=1');
     $stmt->execute([$productId]);
     $product = $stmt->fetch();
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 $categories = ['all' => 'All Products', 'combo' => 'Combo Pads', 'album' => 'Albums', 'led_frame' => 'LED Frames', 'wall_acrylic' => 'Wall Acrylic'];
 $where = $cat !== 'all' ? "AND category=?" : "";
 $params = $cat !== 'all' ? [$cat] : [];
-$stmt = $db->prepare("SELECT * FROM products WHERE active=true $where ORDER BY sort_order");
+$stmt = $db->prepare("SELECT * FROM products WHERE active=1 $where ORDER BY sort_order");
 $stmt->execute($params);
 $products = $stmt->fetchAll();
 

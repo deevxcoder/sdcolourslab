@@ -22,11 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($_POST['product_id']) {
             $stmt = $db->prepare("UPDATE products SET name=?,category=?,description=?,price=?,price_alt=?,sizes=?,features=?,tag=?,active=?,sort_order=? WHERE id=?");
-            $stmt->execute([$name,$category,$description,$price,$priceAlt,$sizes,$features,$tag,$active?'true':'false',$sortOrder,(int)$_POST['product_id']]);
+            $stmt->execute([$name,$category,$description,$price,$priceAlt,$sizes,$features,$tag,$active?1:0,$sortOrder,(int)$_POST['product_id']]);
             $message = 'Product updated.';
         } else {
             $stmt = $db->prepare("INSERT INTO products (name,category,description,price,price_alt,sizes,features,tag,active,sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)");
-            $stmt->execute([$name,$category,$description,$price,$priceAlt,$sizes,$features,$tag,$active?'true':'false',$sortOrder]);
+            $stmt->execute([$name,$category,$description,$price,$priceAlt,$sizes,$features,$tag,$active?1:0,$sortOrder]);
             $message = 'Product added.';
         }
     }
