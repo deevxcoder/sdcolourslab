@@ -56,6 +56,12 @@ $cartCount = $loggedIn && $role === 'photographer' ? getCartCount() : 0;
           <a href="/register.php" class="btn-dash">Register</a>
         </div>
       <?php endif; ?>
+      <?php if ($loggedIn && $role === 'photographer'): ?>
+      <a href="/photographer/cart.php" class="mobile-cart-btn" aria-label="Cart">
+        🛒
+        <?php if ($cartCount > 0): ?><span class="cart-badge"><?= $cartCount ?></span><?php endif; ?>
+      </a>
+      <?php endif; ?>
       <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
