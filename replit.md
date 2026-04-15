@@ -69,6 +69,43 @@ A PHP + PostgreSQL web application for SD Colours Photobook Lab — a profession
 - Admin can add/edit/hide/delete products
 - WhatsApp integration for non-registered users
 
+## REST API
+
+A complete JSON REST API is available at `/api/*` for use by the Flutter photographer mobile app and the admin desktop app.
+
+- **Docs**: `GET /api/docs` — interactive HTML documentation page
+- **Auth**: Bearer token (30-day expiry) obtained via `POST /api/auth/login`
+- **Token storage**: `api_tokens` table — id, user_id, token, expires_at, created_at
+- **CORS**: fully enabled (all origins)
+
+### API Endpoints Summary
+
+| Method | Path | Auth | Description |
+|--------|------|------|-------------|
+| POST | /api/auth/login | public | Login, returns Bearer token |
+| POST | /api/auth/register | public | Register photographer (starts as pending) |
+| GET | /api/auth/me | any | Get own profile |
+| PATCH | /api/auth/me | any | Update profile / change password |
+| POST | /api/auth/logout | any | Revoke current token |
+| GET | /api/products | public | List active products |
+| GET | /api/products/{id} | public | Single product detail |
+| GET | /api/photographer/dashboard | photographer | Stats + recent orders |
+| GET | /api/photographer/orders | photographer | All own orders |
+| GET | /api/photographer/orders/{id} | photographer | Order detail with items |
+| POST | /api/photographer/orders | photographer | Place new order |
+| GET | /api/admin/dashboard | admin | Lab overview stats |
+| GET | /api/admin/orders | admin | All orders (filter by status/search) |
+| GET | /api/admin/orders/{id} | admin | Full order detail |
+| PATCH | /api/admin/orders/{id} | admin | Update status / admin_notes |
+| GET | /api/admin/photographers | admin | List photographers |
+| PATCH | /api/admin/photographers/{id} | admin | Approve/reject photographer |
+| GET | /api/admin/products | admin | All products (incl. inactive) |
+| POST | /api/admin/products | admin | Create product |
+| PUT | /api/admin/products/{id} | admin | Replace product |
+| PATCH | /api/admin/products/{id}/toggle | admin | Toggle active/inactive |
+| DELETE | /api/admin/products/{id} | admin | Delete product |
+
 ## Workflow
 
-- **Start application**: `php -S 0.0.0.0:5000` on port 5000
+- **Start application**: `php -S 0.0.0.0:5000 router.php` on port 5000
+- `router.php` routes `/api/*` to `api/index.php`; all other requests served normally
