@@ -26,7 +26,7 @@
       <div class="footer-col">
         <h3>Contact Us</h3>
         <div class="footer-contact-item"><span class="icon">📍</span><span>Madhusudan Marg, Naredi Tower Complex,<br>Rourkela – 769001, Odisha</span></div>
-        <div class="footer-contact-item"><span class="icon">📞</span><span>+91 88958 38987<br>+91 89841 82131<br>+91 82607 54410</span></div>
+        <div class="footer-contact-item"><span class="icon">📞</span><span>+91 88958 38987<br>+91 82607 54410</span></div>
         <div class="footer-contact-item"><span class="icon">✉️</span><a href="mailto:sdcoloursphotobooklab@gmail.com" style="color:#d1d5db;text-decoration:none;">sdcoloursphotobooklab@gmail.com</a></div>
       </div>
     </div>

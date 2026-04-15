@@ -24,7 +24,7 @@ require_once 'includes/header.php';
             <span style="font-size:1.5rem;">📞</span>
             <div>
               <h3 style="font-weight:700;margin-bottom:.25rem;">Phone</h3>
-              <p style="color:#6b7280;"><a href="tel:+918895838987" style="color:var(--primary);">+91 88958 38987</a><br><a href="tel:+918984182131" style="color:var(--primary);">+91 89841 82131</a><br><a href="tel:+918260754410" style="color:var(--primary);">+91 82607 54410</a></p>
+              <p style="color:#6b7280;"><a href="tel:+918895838987" style="color:var(--primary);">+91 88958 38987</a><br><a href="tel:+918260754410" style="color:var(--primary);">+91 82607 54410</a></p>
             </div>
           </div>
           <div style="display:flex;gap:1rem;align-items:flex-start;">
