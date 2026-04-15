@@ -42,12 +42,13 @@ A PHP + PostgreSQL web application for SD Colours Photobook Lab — a profession
 ├── logout.php          # Logout
 ├── style.css           # Main stylesheet
 └── images/             # Logo, monogram assets
+    └── combos/         # 19 combo product photos (web-accessible)
 ```
 
 ## Database Schema
 
 - **users** — id, name, email, password_hash, role (admin/photographer), phone, studio_name, city, status (pending/approved/rejected), created_at
-- **products** — id, name, category, description, price, price_alt, sizes (JSON), features (JSON), tag, active, sort_order, created_at
+- **products** — id, name, category, description, price, price_alt, sizes (JSON), features (JSON), tag, image, active, sort_order, created_at
 - **orders** — id, photographer_id (FK), status, total, notes, admin_notes, created_at, updated_at
 - **order_items** — id, order_id (FK), product_id (FK), product_name, size, quantity, unit_price, notes
 

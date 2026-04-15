@@ -89,9 +89,14 @@ require_once '../includes/header.php';
       $features = json_decode($p['features'], true);
       $emojis = ['combo'=>'📦','album'=>'📖','led_frame'=>'💡','wall_acrylic'=>'✨'];
       $emoji = $emojis[$p['category']] ?? '🖼️';
+      $hasImg = !empty($p['image']);
     ?>
     <div class="shop-card">
+      <?php if ($hasImg): ?>
+      <div class="shop-card-img" style="padding:0;height:200px;"><img src="<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" style="width:100%;height:100%;object-fit:cover;" loading="lazy" /></div>
+      <?php else: ?>
       <div class="shop-card-img"><?= $emoji ?></div>
+      <?php endif; ?>
       <div class="shop-card-body">
         <?php if ($p['tag']): ?><span style="background:<?= $p['tag']==='Premium'?'#7c3aed':'var(--primary)' ?>;color:#fff;font-size:.65rem;padding:2px 8px;border-radius:10px;font-weight:700;"><?= htmlspecialchars($p['tag']) ?></span><br><br><?php endif; ?>
         <h3><?= htmlspecialchars($p['name']) ?></h3>

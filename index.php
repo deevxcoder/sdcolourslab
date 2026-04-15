@@ -63,7 +63,7 @@ $featured = $db->query("SELECT * FROM products WHERE active = true AND tag IS NO
         ?>
         <div class="product-card">
           <?php if ($p['tag']): ?><span class="product-tag" style="<?= $tagStyle ?>"><?= htmlspecialchars($p['tag']) ?></span><?php endif; ?>
-          <div class="product-card-img"><img src="/images/monogram.png" alt="<?= htmlspecialchars($p['name']) ?>" /></div>
+          <div class="product-card-img"><img src="<?= htmlspecialchars($p['image'] ?: '/images/monogram.png') ?>" alt="<?= htmlspecialchars($p['name']) ?>" style="width:100%;height:100%;object-fit:cover;" /></div>
           <div class="product-card-body">
             <h3><?= htmlspecialchars($p['name']) ?></h3>
             <div class="product-price">₹<?= number_format($p['price']) ?><?= $p['price_alt'] ? ' / ₹' . number_format($p['price_alt']) : '' ?></div>
