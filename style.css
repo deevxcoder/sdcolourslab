@@ -448,23 +448,23 @@ tr:hover td { background: rgba(245,240,232,.5); }
   .header-cta { display: inline-block; }
 }
 
+/* Mobile cart button – hidden by default, shown on mobile only */
+.mobile-cart-btn {
+  display: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  text-decoration: none;
+  padding: .35rem .5rem;
+  color: #fff;
+  line-height: 1;
+}
+
 /* Mobile nav */
 @media (max-width: 1023px) {
   .nav-links, .header-cta { display: none; }
   .hamburger { display: flex; align-items: center; justify-content: center; }
   .user-menu { display: none; }
   .mobile-cart-btn { display: inline-flex; }
-}
-
-/* Mobile cart button – icon only in header */
-.mobile-cart-btn {
-  display: none;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  text-decoration: none;
-  padding: .35rem .5rem;
-  color: #fff;
-  line-height: 1;
 }
