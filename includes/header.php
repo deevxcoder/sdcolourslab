@@ -44,7 +44,7 @@ $cartCount = $loggedIn && $role === 'photographer' ? getCartCount() : 0;
               🛒 Cart
               <?php if ($cartCount > 0): ?><span class="cart-badge"><?= $cartCount ?></span><?php endif; ?>
             </a>
-            <a href="/photographer/index.php" class="btn-dash">My Dashboard</a>
+            <a href="/photographer/index.php" class="btn-dash"><span class="hidden sm:inline">My </span>Dashboard</a>
           <?php elseif ($role === 'admin'): ?>
             <a href="/admin/index.php" class="btn-dash">Admin Panel</a>
           <?php endif; ?>
@@ -78,7 +78,7 @@ $cartCount = $loggedIn && $role === 'photographer' ? getCartCount() : 0;
         <li><a href="/contact.php">Contact</a></li>
         <?php if ($loggedIn): ?>
           <?php if ($role === 'photographer'): ?>
-            <li><a href="/photographer/index.php">My Dashboard</a></li>
+            <li><a href="/photographer/index.php">Dashboard</a></li>
             <li><a href="/photographer/cart.php">Cart (<?= $cartCount ?>)</a></li>
           <?php elseif ($role === 'admin'): ?>
             <li><a href="/admin/index.php">Admin Panel</a></li>
