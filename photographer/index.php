@@ -49,7 +49,14 @@ require_once '../includes/header.php';
 .quick-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
 .quick-link .icon { font-size: 2rem; margin-bottom: .75rem; }
 .quick-link .label { font-weight: 700; font-size: .9rem; }
-@media(max-width:640px){.stats-row,.quick-links{grid-template-columns:1fr!important;}}
+@media(max-width:640px){
+  .stats-row,.quick-links{grid-template-columns:1fr!important;}
+  .dash-wrap{padding:1rem;}
+  .order-table thead{display:none;}
+  .order-table tr{display:block;background:#fff;border:1px solid #f3f4f6;border-radius:10px;margin-bottom:.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .order-table td{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;border-top:1px solid #f9fafb;font-size:.85rem;}
+  .order-table td::before{content:attr(data-label);font-weight:600;color:#6b7280;font-size:.72rem;text-transform:uppercase;flex-shrink:0;margin-right:.5rem;}
+}
 </style>
 
 <div class="dash-wrap" style="padding-top:5.5rem;">
@@ -84,11 +91,11 @@ require_once '../includes/header.php';
       <tbody>
         <?php foreach ($recentOrders as $o): ?>
         <tr>
-          <td><a href="/photographer/orders.php?id=<?= $o['id'] ?>" style="color:var(--primary);font-weight:700;">#<?= $o['id'] ?></a></td>
-          <td><?= date('d M Y', strtotime($o['created_at'])) ?></td>
-          <td><?= $o['item_count'] ?> item<?= $o['item_count'] != 1 ? 's' : '' ?></td>
-          <td>₹<?= number_format($o['total']) ?></td>
-          <td><span class="status-badge status-<?= $o['status'] ?>"><?= ucfirst($o['status']) ?></span></td>
+          <td data-label="Order"><a href="/photographer/orders.php?id=<?= $o['id'] ?>" style="color:var(--primary);font-weight:700;">#<?= $o['id'] ?></a></td>
+          <td data-label="Date"><?= date('d M Y', strtotime($o['created_at'])) ?></td>
+          <td data-label="Items"><?= $o['item_count'] ?> item<?= $o['item_count'] != 1 ? 's' : '' ?></td>
+          <td data-label="Total">₹<?= number_format($o['total']) ?></td>
+          <td data-label="Status"><span class="status-badge status-<?= $o['status'] ?>"><?= ucfirst($o['status']) ?></span></td>
         </tr>
         <?php endforeach; ?>
       </tbody>

@@ -42,6 +42,14 @@ require_once '../includes/header.php';
 .detail-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.06); overflow: hidden; margin-bottom: 2rem; }
 .detail-head { background: linear-gradient(135deg,#1a1a2e,#16213e); color: #fff; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
 .item-row { display: flex; justify-content: space-between; align-items: center; padding: .85rem 1.5rem; border-bottom: 1px solid #f3f4f6; }
+@media(max-width:640px){
+  .orders-wrap{padding:1rem;padding-top:5.5rem;}
+  .orders-table thead{display:none;}
+  .orders-table tr{display:block;background:#fff;border:1px solid #f3f4f6;border-radius:10px;margin-bottom:.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .orders-table td{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;border-top:1px solid #f9fafb;font-size:.85rem;}
+  .orders-table td::before{content:attr(data-label);font-weight:600;color:#6b7280;font-size:.72rem;text-transform:uppercase;flex-shrink:0;margin-right:.5rem;}
+  .item-row{flex-wrap:wrap;gap:.5rem;}
+}
 </style>
 
 <div class="orders-wrap">
@@ -107,12 +115,12 @@ require_once '../includes/header.php';
     <tbody>
       <?php foreach ($orders as $o): ?>
       <tr>
-        <td><strong>#<?= $o['id'] ?></strong></td>
-        <td><?= date('d M Y', strtotime($o['created_at'])) ?></td>
-        <td><?= $o['item_count'] ?> item<?= $o['item_count'] != 1 ? 's' : '' ?></td>
-        <td>₹<?= number_format($o['total']) ?></td>
-        <td><span class="status-badge status-<?= $o['status'] ?>"><?= ucfirst($o['status']) ?></span></td>
-        <td><a href="/photographer/orders.php?id=<?= $o['id'] ?>" style="color:var(--primary);font-weight:700;font-size:.85rem;text-decoration:none;">View Details →</a></td>
+        <td data-label="Order"><strong>#<?= $o['id'] ?></strong></td>
+        <td data-label="Date"><?= date('d M Y', strtotime($o['created_at'])) ?></td>
+        <td data-label="Items"><?= $o['item_count'] ?> item<?= $o['item_count'] != 1 ? 's' : '' ?></td>
+        <td data-label="Total">₹<?= number_format($o['total']) ?></td>
+        <td data-label="Status"><span class="status-badge status-<?= $o['status'] ?>"><?= ucfirst($o['status']) ?></span></td>
+        <td data-label="Action"><a href="/photographer/orders.php?id=<?= $o['id'] ?>" style="color:var(--primary);font-weight:700;font-size:.85rem;text-decoration:none;">View Details →</a></td>
       </tr>
       <?php endforeach; ?>
     </tbody>
